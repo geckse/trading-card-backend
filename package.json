@@ -1,0 +1,33 @@
+{
+  "name": "trading-card-backend",
+  "version": "0.1.0",
+  "description": "Modular Trading Card Backend based on Node.js / Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geckse/trading-card-backend.git"
+  },
+  "author": "geckse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geckse/trading-card-backend/issues"
+  },
+  "homepage": "https://github.com/geckse/trading-card-backend#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "chalk": "^2.4.1",
+    "compression": "^1.7.3",
+    "crypto": "^1.0.1",
+    "dotenv": "^6.2.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.4",
+    "express-flash": "0.0.2",
+    "lusca": "^1.6.1",
+    "mongoose": "^5.4.2",
+    "node-sass-middleware": "^0.11.0"
+  }
+}

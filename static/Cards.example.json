@@ -1,0 +1,9 @@
+[{
+	id: 'spell.fireball'
+	category: 'Spell'
+	title: 'Mighty Fireball'
+	value: 100,
+	attack: 10,
+	mana: 5,
+	quality: 'normal'
+}];
