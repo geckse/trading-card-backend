@@ -50,30 +50,30 @@ The related API endpoints would be: ``` /api/cards/element/fire  / /api/cards/ca
 
 ### GET ```/api/cards```
 
-*Status*: 200
-*Result.data*: `Array` of Cards, analogous to Cards.json
+**Status**: 200
+**Result.data**: `Array` of Cards, analogous to Cards.json
 
 ### GET ```/api/card/:cardid```
 
-*Params (required)*: `:cardid` the ID of the card you want to query.
+**Params (required)**: `:cardid` the ID of the card you want to query.
 
-*Status*: 200
-*Result.data*: `Object` with Values of the Card, as defined in Cards.json
+**Status**: 200
+**Result.data**: `Object` with Values of the Card, as defined in Cards.json
 
 When no Card is found by the given id:
 
-*Status*: 404
-*Result.data*: `null`  
+**Status**: 404
+**Result.data**: `null`  
 
 When no CardId is delivered:
 
-*Status*: 400
-*Result.data*: `null`  
+**Status**: 400
+**Result.data**: `null`  
 
 ### GET ```/api/cards/:category/:value```
 
-*Params (required)*: `:category` mostly dynamic, defined trough Categories.json
-*Params (required)*: `:value` the value you want to query. 
+**Params (required)**: `:category` mostly dynamic, defined trough Categories.json
+**Params (required)**: `:value` the value you want to query. 
 
-*Status*: 200
-*Result.data*: `Array` of Cards, which matched the value in the given category
+**Status**: 200
+**Result.data**: `Array` of Cards, which matched the value in the given category
