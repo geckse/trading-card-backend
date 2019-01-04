@@ -1,9 +1,19 @@
 [{
-	id: 'spell.fireball'
-	category: 'Spell'
-	title: 'Mighty Fireball'
-	value: 100,
-	attack: 10,
-	mana: 5,
-	quality: 'normal'
-}];
+	"id": "spell.fireball",
+	"category": "Spell",
+	"title": "Mighty Fireball",
+	"element": "Fire",
+	"value": 100,
+	"attack": 10,
+	"mana": 5,
+	"quality": "normal"
+},{
+	"id": "spell.icefist",
+	"category": "Spell",
+	"title": "Ice Fist",
+	"element": "Ice",
+	"value": 120,
+	"attack": 15,
+	"mana": 7,
+	"quality": "normal"
+}]

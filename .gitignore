@@ -17,6 +17,7 @@ tmp
 public/css/main.css
 
 static/Cards.json
+static/Categories.json
 
 # API keys and secrets
 .env
