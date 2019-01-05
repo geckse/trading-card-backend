@@ -1,3 +1,5 @@
+![Image Trading Card Demo](https://raw.githubusercontent.com/geckse/trading-card-backend/master/public/images/github-visual.png)
+
 # Trading Card Backend
 
 Simple Node.js Express App, which is basically a RESTful API for something like a trading card game.
@@ -97,7 +99,13 @@ When no CardId is delivered:
 ### GET ```/api/categories```
 
 **Status**: 200
-**Result.data**: `Array` of Categories, with possible combinations
+**Result.data**: `Array` of Objects, with possible combinations
+Objects looks like ```
+[{
+name: 'category',
+values: ['value1', 'value2']
+}]
+```
 
 ## ToDo / Planed
 
