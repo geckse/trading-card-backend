@@ -100,8 +100,8 @@ When no CardId is delivered:
 
 ## ToDo / Planed
 
-[ ] MongoDB Integration
-[ ] Usermanagement 
-[ ] Storing Inventories / possibillity to give Users cards
-[ ] trading Cards with other Users
-[ ] Card-Deck Management
+- [ ] MongoDB Integration
+- [ ] Usermanagement 
+- [ ] Storing Inventories / possibillity to give Users cards
+- [ ] trading Cards with other Users
+- [ ] Card-Deck Management
