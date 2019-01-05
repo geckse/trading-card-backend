@@ -2,7 +2,6 @@ const express = require('express');
 const compression = require('compression');
 const dotenv = require('dotenv');
 const lusca = require('lusca');
-const flash = require('express-flash');
 const sass = require('node-sass-middleware');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -24,6 +23,7 @@ const cardController = require('./controllers/cards');
  * Express configuration.
  */
 const app = express();
+app.set('view engine', 'ejs');
 app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.use(compression());
@@ -37,7 +37,6 @@ app.use(bodyParser.urlencoded({
   extended: true,
   parameterLimit:50000
 }));
-app.use(flash());
 app.use((req, res, next) => {
   if (req.path.indexOf('/api/') !== false) {
     next();
@@ -78,6 +77,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.get('/api', cardController.getApi);
 app.get('/api/cards', cardController.getAllCards);
 app.get('/api/card/:cardid', cardController.getCardById);
+app.get('/api/categories', cardController.getCardsCategories);
 
 /**
  * Error Handler.
@@ -88,6 +88,15 @@ if (!fs.existsSync(path.join(__dirname, 'static', 'Cards.json'))) {
 	console.log('%s Cards.json not found. Please define some Cards at /static/Cards.json', chalk.red('×'));	
 	console.log('---');
 } else {
+	
+	if(process.env.RUN_DEMO){
+		// index demo page 
+		console.log('%s Running Demo Pages', chalk.green('✓'));
+		app.get('/', function(req, res) {
+		    res.render('demo');
+		});
+	}
+	
 	if (fs.existsSync(path.join(__dirname, 'static', 'Categories.json'))) {
 		fs.readFile(path.join(__dirname, 'static', 'Categories.json'), 'utf8', (err, data) => {
 		    if (err) throw err;

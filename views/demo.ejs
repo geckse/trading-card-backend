@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Trading Card Backend</title>
+  </head>
+  <body>
+
+
+	<nav class="navbar navbar-light bg-light">
+	  <a class="navbar-brand" href="#">Trading Card Backend</a>
+	</nav>
+	
+	
+	<div id="filter-wrapper">
+	
+	</div>
+	<hr>
+	<div id="card-wrapper">
+		<div class="alert alert-light" role="alert">
+		  Loading ...
+		</div>		
+	</div>
+	
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+		/*
+			this is a little jquery example to interact with the api	
+		*/			
+		(function($) {
+		  		  
+		  $.get("/api/cards", function(resp, status){
+		  	// in case of error
+		  	if(!resp.success) return alert('Error '+resp.message);
+			
+			// render the cards as.. bootstrap cards!
+			var cardsHTML = "";
+			if(resp.data){
+				for(var i = 0; i < resp.data.length; i++){
+									
+					cardsHTML += '<div class="card" style="width: 18rem; float: left; margin: 10px;">';
+					cardsHTML += '<div class="card-body">';
+					cardsHTML += '<h5 class="card-title">id: '+resp.data[i].id+'</h5>';
+					cardsHTML += '</div>';
+				
+					cardsHTML += '<ul class="list-group list-group-flush">';
+					for(var key in resp.data[i]) {
+						if(key == "id") continue;
+					    var value = resp.data[i][key];
+					    cardsHTML += '<li class="list-group-item" style="padding-top: 2px; padding-bottom: 2px;"><small><table><tr><td style="width: 6rem;"><strong>'+key+'</strong>: </td><td>'+value+'</td></tr></table></small></li>';
+					}
+					cardsHTML += '</ul>';
+					
+					cardsHTML += '</div>';
+					
+				}
+			}
+			$('#card-wrapper').get(0).innerHTML = cardsHTML;  	
+			  	
+		  });	
+		  
+		  // get all filter combinations
+		  $.get("/api/categories", function(resp, status){
+		  	// in case of error
+		  	if(!resp.success) return alert('Error '+resp.message);
+			
+			var filterHTML = "";
+			if(resp.data){
+				for(var i = 0; i < resp.data.length; i++){
+					
+					filterHTML += '<ul class="nav nav-pills flex-column flex-sm-row">';
+					filterHTML += '<li class="nav-item"><a class="nav-link disabled" href="#">'+resp.data[i].name+'</a></li>';				
+					
+					for(var c = 0; c < resp.data[i].values.length; c++){
+						filterHTML += '<li class="nav-item filter-link"><a class="nav-link" href="/api/cards/'+resp.data[i].name+'/'+resp.data[i].values[c]+'">'+resp.data[i].values[c]+'</a></li>';
+					}
+					
+					if(i == resp.data.length-1){
+						filterHTML += '<li class="nav-item filter-link text-warning"><a class="nav-link text-warning" href="/api/cards/">reset</a></li>';
+					}
+					
+					filterHTML += '</ul>';
+					
+				}
+			}
+			$('#filter-wrapper').get(0).innerHTML = filterHTML;  	
+			
+			$('#filter-wrapper .filter-link a').click(function(ev){
+				
+				ev.preventDefault();
+				console.log($(this));
+				var url = $(this).attr('href');
+				
+				$('#filter-wrapper .filter-link a').each(function(){
+					$(this).removeClass('active');
+				});
+				$(this).addClass('active');
+				
+				$.get(url, function(resp, status){
+				  	// in case of error
+				  	if(!resp.success) return alert('Error '+resp.message);
+					
+					// render the cards as.. bootstrap cards!
+					var cardsHTML = "";
+					if(resp.data){
+						for(var i = 0; i < resp.data.length; i++){
+											
+							cardsHTML += '<div class="card" style="width: 18rem; float: left; margin: 10px;">';
+							cardsHTML += '<div class="card-body">';
+							cardsHTML += '<h5 class="card-title">id: '+resp.data[i].id+'</h5>';
+							cardsHTML += '</div>';
+						
+							cardsHTML += '<ul class="list-group list-group-flush">';
+							for(var key in resp.data[i]) {
+								if(key == "id") continue;
+							    var value = resp.data[i][key];
+							    cardsHTML += '<li class="list-group-item" style="padding-top: 2px; padding-bottom: 2px;"><small><table><tr><td style="width: 6rem;"><strong>'+key+'</strong>: </td><td>'+value+'</td></tr></table></small></li>';
+							}
+							cardsHTML += '</ul>';
+							
+							cardsHTML += '</div>';
+							
+						}
+					}
+					$('#card-wrapper').get(0).innerHTML = cardsHTML;  	
+					  	
+				});
+			});
+			
+ 		  });	
+ 
+		  		  
+		})( jQuery );	
+	
+
+	</script>    
+    
+  </body>
+</html>

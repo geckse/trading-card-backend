@@ -94,9 +94,10 @@ When no CardId is delivered:
 **Params (required)**: `:category` mostly dynamic, defined trough Categories.json
 **Params (required)**: `:value` the value you want to query. 
 
-**Status**: 200
-**Result.data**: `Array` of Cards, which matched the value in the given category
+### GET ```/api/categories```
 
+**Status**: 200
+**Result.data**: `Array` of Categories, with possible combinations
 
 ## ToDo / Planed
 

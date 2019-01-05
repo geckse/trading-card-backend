@@ -16,10 +16,12 @@ fs.readFile(path.join(__dirname, '..', 'static', 'Cards.json'), 'utf8', function
 });
 
 var AllCategories = [];
-fs.readFile(path.join(__dirname, '..', 'static', 'Categories.json'), 'utf8', function (err, data) {
-    if (err) throw err;
-    AllCategories = JSON.parse(data);
-});
+if (fs.existsSync(path.join(__dirname, '..', 'static', 'Categories.json'))) {
+	fs.readFile(path.join(__dirname, '..', 'static', 'Categories.json'), 'utf8', function (err, data) {
+	    if (err) throw err;
+	    AllCategories = JSON.parse(data);
+	});
+}
 
 /**
  * GET /api/
@@ -37,6 +39,24 @@ exports.getAllCards = (req, res) => {
    res.json({ success: true, data: AllCards});
 };
 
+/**
+ * GET /api/categories
+ * List all Categories and possible values
+ */
+exports.getCardsCategories = (req, res) => {
+   var result = [];
+   AllCategories.forEach((category) => {
+   	  var subs = [];
+	  AllCards.forEach((card) => {
+	  	if(card[category] && subs.indexOf(card[category].toLowerCase()) == -1) subs.push(card[category].toLowerCase());
+	  });
+	  result.push({
+		  name: category,
+		  values: subs
+	  });
+    });
+   res.json({ success: true, data: result});	
+};
 /**
  * GET /api/cards/dynamiccategory/:value
  * List of all cards in one category.
