@@ -5,6 +5,25 @@ Simple Node.js Express App, which is basically a RESTful API for something like 
 Everything is build around one simple JSON, where you can define the cards and all nesessary value of your cards to shape your game.
 After this, you are ready to go: Retrieve your cards, create / or allow register of new user, manage the inventory of users and users cards decks.
 
+## Quickstart:
+
+**Install**
+```
+$ npm install
+```
+
+**Define Cards (or outcomment .example.json for testing)**
+```
+static/Cards.json
+```
+
+**Start**
+```
+$ npm start
+```
+
+Play. Cards. With your Friends. 🃏
+
 ## Add your custom Cards
 
 Simply define all your cards in ```static/Cards.json```
@@ -77,3 +96,12 @@ When no CardId is delivered:
 
 **Status**: 200
 **Result.data**: `Array` of Cards, which matched the value in the given category
+
+
+## ToDo / Planed
+
+[ ] MongoDB Integration
+[ ] Usermanagement 
+[ ] Storing Inventories / possibillity to give Users cards
+[ ] trading Cards with other Users
+[ ] Card-Deck Management
