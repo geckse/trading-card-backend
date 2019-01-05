@@ -100,12 +100,10 @@ When no CardId is delivered:
 
 **Status**: 200
 **Result.data**: `Array` of Objects, with possible combinations
-Objects looks like ```
-[{
+Objects looks like ```[{
 name: 'category',
 values: ['value1', 'value2']
-}]
-```
+}]```
 
 ## ToDo / Planed
 
